@@ -1,0 +1,19 @@
+version: "3.8"
+# name: ts-nestjs-prisma-sqlserver-docker # nofing
+
+services:
+  app:
+    build:
+      # Path of Dockerfile
+      context: .
+      dockerfile: Dockerfile
+    command: sleep infinity
+    restart: on-failure
+    networks:
+      - backend
+    volumes:
+      - ../..:/workspaces:cached
+
+networks:
+  backend:
+
