@@ -1,29 +1,65 @@
-import express, { Request, Response } from "express";
-import { UserService } from "../../Domain/Services/UserService";
-// import { UserType } from "src/Domain/Entities/User";
-
-const router = express.Router();
-
-const _service = new UserService();
+import type { Request, Response } from "express";
+import { Body, Controller, Get, Inject, Path, Post, Route, SuccessResponse, Tags } from "tsoa";
+import { UserService } from "@Domain/Services/UserService";
+import { User } from "@Domain/Entities/User";
 
 
-router.post('/', async (req: Request, res: Response) => {
-	const body: any = req.body;
+@Tags('User')
+@Route("users")
+export class UserController extends Controller {
 
-	return res.status(201).send(
-		await _service.createOne(body)
-	);
-});
+	private readonly _service = new UserService();
 
-router.get('/:id', async (req: Request, res: Response) => {
-	// const body: any = req.body;
-	const id: string = req.params.id;
+	@Post('/')
+	public async createUser(
+		@Inject() req: Request,
+		@Inject() res: Response,
+		@Body() body: User
+	): Promise<any> {
+		try {
+			const newUserDb = await this._service.createOne(body)
+			return res.status(201).send(
+				newUserDb
+			);
+		} catch (ex) {
+			return res.status(422).send(
+				ex
+			);
+		}
+	};
 
-	const targetUserId = Number.parseInt(id);
+	@Get('/:id')
+	public async findUser(
+		@Inject() req: Request,
+		@Inject() res: Response,
+		@Path('id') id: number
+	): Promise<any> {
+		try {
+			// const targetUserId = Number.parseInt(id);
+			const newUserDb = await this._service.readOne(id)
+			return res.status(200).send(
+				newUserDb
+			);
+		} catch (ex) {
+			return res.status(422).send(
+				ex
+			);
+		}
+	};
 
-	return res.status(200).send(
-		await _service.readOne(targetUserId)
-	);
-});
+	@Get('/all')
+	@SuccessResponse(200)
+	public async getAllUser(
+		@Inject() req: Request,
+		@Inject() res: Response
+	): Promise<User[]> {
 
-export default router;
+		const result = await this._service.readAllUsers();
+
+		res.status(200).send(
+			result
+		);
+		return result;
+	};
+
+}

@@ -1,47 +1,14 @@
-import express, { json, urlencoded, Request, Response } from "express";
-import morgan from "morgan";
-import swaggerUi from "swagger-ui-express";
-/*
-import cookieParser from "cookie-parser";
-import cors from "cors";
-app.use(cors());
-*/
+import express from "express";
+import routers from './Application/Routes/index';
 
-import routers from './Application/Controllers/index';
 
-console.time('Restart');
+async function bootstrap() {
+  console.time('Restart');
 
-const app = express();
+  const app = express();
+  app.use(routers);
 
-app.use(express.json());
-app.use(morgan("tiny"));
-app.use(express.static("public"));
+  app.listen(3333, () => console.timeEnd('Restart'));
+}
 
-app.use(
-  urlencoded({
-    extended: true,
-  })
-);
-app.use(json());
-
-app.use(express.json());
-
-// app.use(
-//   "/docs",
-//   swaggerUi.serve,
-//   swaggerUi.setup(undefined, {
-//     swaggerOptions: {
-//       url: await import("../public/swagger.json"),
-//       // url: "/swagger.json",
-//     },
-//   })
-// );
-app.use("/docs", swaggerUi.serve, async (_req: Request, res: Response) => {
-  return res.send(
-    swaggerUi.generateHTML(await import("../public/swagger.json"))
-  );
-});
-
-app.use(routers);
-
-app.listen(3333, () => console.timeEnd('Restart'));
+bootstrap();

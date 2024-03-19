@@ -1,46 +1,35 @@
 import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	Path,
-	Post,
-	Query,
-	Route,
-	SuccessResponse,
+	Body, Controller, Delete, Get, Path, Post, Query, Route, SuccessResponse,
 } from "tsoa";
+import { User } from "../Entities/User";
 
-import { UserType } from "../Entities/User";
-
-@Route("users")
-export class UserService extends Controller {
+export class UserService {
 	// private readonly _repository: userRepository;
 
 	constructor() {
-		super();
 		// this._repository = new userRepository;
 	}
-	
-	@Post("")
-	@SuccessResponse("201", "Created")
-	public async createOne(
-		@Body() createUserDto: UserType
-	): Promise<UserType> {
+
+	public async createOne(createUserDto: User): Promise<User> {
 		const newUser = createUserDto;
 
 		return newUser;
 	}
 
-	@Get("{id}")
-	@SuccessResponse("200")
-	async readOne(
-		@Path() id: UserType['id']
-	): Promise<UserType> {
+	async readOne(id: User['id']): Promise<User> {
 		return {
 			id: id,
 			name: 'caio',
 			email: 'cdonat.dev@gmail.com'
 		}
+	}
+
+	public async readAllUsers(): Promise<User[]> {
+		return [{
+			id: 1,
+			name: 'caio',
+			email: 'cdonat.dev@gmail.com'
+		}]
 	}
 
 	// @Delete("{id}")
