@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { Body, Controller, Delete, Get, Inject, Path, Post, Route, SuccessResponse, Tags } from "tsoa";
-import { UserService } from "@Domain/Services/UserService";
-import { User } from "@Domain/Entities/User";
+import { UserService } from "../../Domain/Services/UserService";
+import { User } from "../../Domain/Entities/User";
 
 
 @Tags('User')
@@ -73,12 +73,12 @@ export class UserController extends Controller {
 			const newUserDb = await this._service.readOne(id)
 
 			res.status(204).send(
-			);
+			).end();
 			return;
 		} catch (ex) {
 			res.status(422).send(
 				ex
-			);
+			).end();
 			return;
 		}
 	}

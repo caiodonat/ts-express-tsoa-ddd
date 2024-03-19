@@ -8,6 +8,8 @@ RUN npm i
 
 COPY . .
 
+CMD [ "node", "dist/src/main.js" ]
+
 
 FROM base as production
 

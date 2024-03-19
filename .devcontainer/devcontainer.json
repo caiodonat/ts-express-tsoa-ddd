@@ -1,7 +1,0 @@
-{
-	"name": "ts-express-tsoa-ddd",
-	"dockerComposeFile": "docker-compose.yaml",
-	"service": "app",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-	"forwardPorts": [3000, 5555]
-}
