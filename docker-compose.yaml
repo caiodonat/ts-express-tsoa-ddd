@@ -1,23 +1,23 @@
-version: "3.8"
-# name: ts-nestjs-prisma-sqlserver-docker # nofing
+version: '3.7'
 
 services:
-  app:
+  ts-node-docker:
     build:
       context: .
       dockerfile: Dockerfile
-    command: sleep infinity
-    restart: on-failure
-    networks:
-      - backend
+      target: base
     volumes:
-      - ../..:/workspaces:cached
+      - ./src:/home/node/app/src
+      - ./nodemon.json:/home/node/app/nodemon.json
+    container_name: ts-node-docker
+    expose:
+      - '3333'
+    ports:
+      - '3333:3333'
+    command: npm run dev
     deploy:
       resources:
         limits:
           cpus: '1.0'
           memory: '2.0GB'
-
-networks:
-  backend:
 

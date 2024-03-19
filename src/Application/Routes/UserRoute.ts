@@ -20,4 +20,10 @@ router.get('/:id', async (req: Request, res: Response) => {
 	return await _service.findUser(req, res, id)
 });
 
+router.delete('/:id', async (req: Request, res: Response) => {
+	const id: any = req.params.id;
+
+	return await _service.deleteUser(req, res, id)
+});
+
 export default router;

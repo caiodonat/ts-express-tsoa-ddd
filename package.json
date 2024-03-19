@@ -11,7 +11,7 @@
     "test": "test",
     "build:swagger": "tsoa spec",
     "build": "tsc -p .",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/main.ts"
   },
   "dependencies": {
     "concurrently": "^8.2.2",

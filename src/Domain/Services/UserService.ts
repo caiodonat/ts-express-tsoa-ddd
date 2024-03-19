@@ -25,18 +25,21 @@ export class UserService {
 	}
 
 	public async readAllUsers(): Promise<User[]> {
-		return [{
-			id: 1,
-			name: 'caio',
-			email: 'cdonat.dev@gmail.com'
-		}]
+		return [
+			{
+				id: 1,
+				name: 'caio',
+				email: 'cdonat.dev@gmail.com'
+			},
+			{
+				id: 2,
+				name: 'Caio Donat',
+				email: 'caiohdonat@gmail.com'
+			}
+		]
 	}
 
-	// @Delete("{id}")
-	// @SuccessResponse("204")
-	// async deleteOne(
-	// 	@Path() id: UserType['id']
-	// ) {
+	// public async removeUser(id: UserType['id']) {
 	// 	// _repository.deleteById(id)
 	// 	return;
 	// }

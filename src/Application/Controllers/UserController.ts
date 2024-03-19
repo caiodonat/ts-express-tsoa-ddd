@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { Body, Controller, Get, Inject, Path, Post, Route, SuccessResponse, Tags } from "tsoa";
+import { Body, Controller, Delete, Get, Inject, Path, Post, Route, SuccessResponse, Tags } from "tsoa";
 import { UserService } from "@Domain/Services/UserService";
 import { User } from "@Domain/Entities/User";
 
@@ -62,4 +62,24 @@ export class UserController extends Controller {
 		return result;
 	};
 
+	@Delete('/:id')
+	@SuccessResponse(204)
+	public async deleteUser(
+		@Inject() req: Request,
+		@Inject() res: Response,
+		@Path('id') id: number
+	): Promise<void> {
+		try {
+			const newUserDb = await this._service.readOne(id)
+
+			res.status(204).send(
+			);
+			return;
+		} catch (ex) {
+			res.status(422).send(
+				ex
+			);
+			return;
+		}
+	}
 }
