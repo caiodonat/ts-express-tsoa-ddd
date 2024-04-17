@@ -6,9 +6,8 @@ COPY package*.json ./
 
 RUN npm i
 
-RUN apt-get install -y nginx
-
 ADD nginx.conf /etc/nginx/nginx.conf
+
 COPY . .
 
 CMD [ "node", "dist/src/main.js" ]
