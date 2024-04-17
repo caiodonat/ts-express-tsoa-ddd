@@ -33,7 +33,7 @@ services:
           memory: '1.5GB'
 
   nginx: # Load Balancer
-    image: nginx:latest
+    image: nginx:1.25.5
     depends_on:
       - app1
       - app2
