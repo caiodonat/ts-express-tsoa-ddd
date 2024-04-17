@@ -6,6 +6,8 @@ COPY package*.json ./
 
 RUN npm i
 
+RUN chown -R node /app/node_modules
+
 COPY . .
 
 CMD [ "node", "dist/src/main.js" ]
