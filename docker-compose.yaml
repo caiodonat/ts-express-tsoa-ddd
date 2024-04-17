@@ -7,21 +7,8 @@ services:
     hostname: app1
     environment:
       DB_URL: "postgres://postgres:postgres@postgres:5432/postgres"
-      DB_POOL: 35
-      PINO_LOG_LEVEL: "debug"
-      REQ_TIMEOUT: "2000"
-      NODE_ENV: production
-      CLUSTER: true
-      CLUSTER_WORKERS: 5
-    expose:
-      - "3333"
     depends_on:
       - postgres
-    ulimits:
-      nproc: 1000000
-      nofile:
-        soft: 1000000
-        hard: 1000000
     deploy:
       resources:
         limits:
@@ -31,10 +18,6 @@ services:
   app2:
     <<: *app
     hostname: app2
-          
-  # app3:
-  #   <<: *app
-  #   hostname: app3
 
   postgres:
     image: postgres:15.4
