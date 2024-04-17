@@ -12,7 +12,6 @@ COPY . .
 
 CMD [ "node", "dist/src/main.js" ]
 
-
 FROM base as production
 
 ENV NODE_PATH=./build
