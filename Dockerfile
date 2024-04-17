@@ -6,10 +6,15 @@ COPY package*.json ./
 
 RUN npm i
 
-ADD nginx.conf /etc/nginx/nginx.conf
+RUN chown -R node /app/node_modules
 
 COPY . .
 
 CMD [ "node", "dist/src/main.js" ]
 
-EXPOSE 3000
+
+FROM base as production
+
+ENV NODE_PATH=./build
+
+RUN npm run build
