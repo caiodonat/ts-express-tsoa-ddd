@@ -12,9 +12,4 @@ COPY . .
 
 CMD [ "node", "dist/src/main.js" ]
 
-
-FROM base as production
-
-ENV NODE_PATH=./build
-
-RUN npm run build
+EXPOSE 3000
