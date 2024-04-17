@@ -13,8 +13,8 @@ services:
       NODE_ENV: production
       CLUSTER: true
       CLUSTER_WORKERS: 5
-    expose:
-      - "3333"
+    ports:
+      - "3333:3333"
     depends_on:
       - postgres
     ulimits:
@@ -28,9 +28,9 @@ services:
           cpus: '1.0'
           memory: '2.0GB'
           
-  app2:
-    <<: *app
-    hostname: app2
+  # app2:
+  #   <<: *app
+  #   hostname: app2
           
   # app3:
   #   <<: *app
@@ -53,20 +53,20 @@ services:
           cpus: '0.9'
           memory: '1.5GB'
 
-  nginx: # Load Balancer
-    image: nginx:latest
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - app1
-      - app2
-    ports:
-      - "9999:9999"
-    deploy:
-      resources:
-        limits:
-          cpus: '0.1'
-          memory: '0.5GB'
+  # nginx: # Load Balancer
+  #   image: nginx:latest
+  #   # volumes:
+  #   #   - ./nginx.conf:/etc/nginx/nginx.conf
+  #   depends_on:
+  #     - app1
+  #     - app2
+  #   ports:
+  #     - "9999:9999"
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.1'
+  #         memory: '0.5GB'
 
 # networks:
 #   backend:
