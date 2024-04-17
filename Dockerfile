@@ -2,6 +2,8 @@ FROM node:20 as base
 
 WORKDIR /home/node/app
 
+ADD nginx.conf /etc/nginx/nginx.conf
+
 COPY package*.json ./
 
 RUN npm i
