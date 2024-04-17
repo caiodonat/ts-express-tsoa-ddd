@@ -22,10 +22,6 @@ services:
   postgres:
     image: postgres:15.4
     restart: unless-stopped
-    volumes:
-      - psql-data:/var/lib/postgresql/data
-    # networks:
-    #   - backend
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
